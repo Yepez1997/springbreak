@@ -34,7 +34,6 @@ int read_int() {
 //	reads user input and calls functions 
 int main() {
 	
-	
 	 // number of test cases 
 	int test_cases  = read_int();
 
@@ -106,8 +105,6 @@ int iterate_through_valid_coins(int denominations, int max_pay, int *value_coin,
 	// reset count for future test cases 
     output = 0; 
 }
-
-
 
 
 void distinct_m(int denominations, int max_pay, int *value_coin, int *each_coin) { 
