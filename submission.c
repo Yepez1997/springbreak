@@ -3,6 +3,9 @@
 #include <string.h>
 #include <math.h>
 
+#define TRUE 1 
+#define FALSE 0
+
 // Notes 
 // Consider remainder 
 // update M/max_payemnet as we go  ?
@@ -10,6 +13,8 @@
 #define gc getchar_unlocked
 
 void distinct_m(int denominations, int max_pay, int *value_coin, int *each_coin);
+int iterate_through_valid_coin(int denominations, int max_pay, int *value_coin, int *each_coin);
+int _check_null_coins(int *each_coin, int denominations);
 
 //  read_int()
 //      reads in a single char at faster speeds
@@ -65,14 +70,28 @@ int main() {
 	return 0;
 }
 
-// distinct m()
-// 	output
-void distinct_m(int denominations, int max_pay, int *value_coin, int *each_coin) { 
-	// this just outputs first test case 
-	// set up  a count ... 
-	// how much is actually payable if we want distinctiness 
-	// iterate one set of coins at a time 
 
+/* check_null_values: detects if there exist a null coin 
+*
+*
+*/
+
+int check_null_coin(int *each_coin, int denominations){
+   	for(int i=0; i < denominations; i++){ 
+   		if (each_coin[i] == 0){ 
+   			return 1; /*There exist a null coin*/
+   		}
+   	}
+   	return 0; /*There isnt any null coins, just compute product of all*/ 
+}
+
+
+
+/* terate_through_valid_coins: 
+* Eventually do FFT ? 
+*
+*/
+int iterate_through_valid_coins(int denominations, int max_pay, int *value_coin, int *each_coin) {
 	int output = 0; 
 	for (int i = 0; i < denominations; i++) { 
 		for(int j = 0; j < denominations; j++) {
@@ -86,6 +105,37 @@ void distinct_m(int denominations, int max_pay, int *value_coin, int *each_coin)
 	printf("%i\n",output);
 	// reset count for future test cases 
     output = 0; 
+}
+
+
+
+
+void distinct_m(int denominations, int max_pay, int *value_coin, int *each_coin) { 
+	// this just outputs first test case 
+	// set up  a count ... 
+	// how much is actually payable if we want distinctiness 
+	// iterate one set of coins at a time 
+	// count if its able to output for each individual one set a disticnt count
+	// if there exits m values ... 
+	// different ways of adding values ? 
+
+	// int distinct_counts = 0 
+
+	// reset count for future test cases 
+	int disticnt_count = 0;
+
+	int null_coins = check_null_coin(each_coin, denominations);
+
+	if (null_coins == TRUE) { 
+		// eventually recurse through every possibilty 
+		printf("%s\n","there exists a null coin" );
+	}
+
+	else { 
+		// try running at o(n) ? 
+		iterate_through_valid_coins(denominations,max_pay, value_coin, each_coin);
+	}
+
 }
 
 
